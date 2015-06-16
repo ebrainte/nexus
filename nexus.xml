@@ -150,7 +150,6 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <provider>apacheHttpClient3x</provider>
         <url>http://hazelcast.com/maven2/snapshots/</url>
       </remoteStorage>
       <externalConfiguration>
@@ -182,7 +181,6 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <provider>apacheHttpClient3x</provider>
         <url>http://repository.jboss.org/maven2/</url>
       </remoteStorage>
       <externalConfiguration>
@@ -214,7 +212,6 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <provider>apacheHttpClient3x</provider>
         <url>http://download.java.net/maven/2/</url>
       </remoteStorage>
       <externalConfiguration>
@@ -246,7 +243,6 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <provider>apacheHttpClient3x</provider>
         <url>http://bleu.west.spy.net/~dustin/m2repo/</url>
       </remoteStorage>
       <externalConfiguration>
@@ -357,7 +353,6 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <provider>apacheHttpClient3x</provider>
         <url>http://repository.springsource.com/maven/bundles/external/</url>
       </remoteStorage>
       <externalConfiguration>
@@ -389,7 +384,6 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <provider>apacheHttpClient3x</provider>
         <url>http://mvn.riptano.com/content/repositories/public/</url>
       </remoteStorage>
       <externalConfiguration>
@@ -422,7 +416,6 @@
         <url>file:/usr/appdata/nexus/storage/codehaus/</url>
       </localStorage>
       <remoteStorage>
-        <provider>apacheHttpClient3x</provider>
         <url>http://repository.codehaus.org/</url>
       </remoteStorage>
       <externalConfiguration>
