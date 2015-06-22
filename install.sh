@@ -12,3 +12,7 @@ wget https://raw.githubusercontent.com/ebrainte/nexus/master/nexus.xml -O nexusD
 #mv nexusData/conf/security.xml nexusData/conf/security.xml.bak
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/security.xml -O nexusData/conf/security.xml
 echo "Now you can start nexus by doing nexus/bin/nexus start"
+
+
+
+rsync -av --delete nexusData/storage/releases/ nexusprod-01:nexusData/storage/releases/
