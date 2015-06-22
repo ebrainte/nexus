@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nexusConfiguration>
   <version>2.8.0</version>
-  <nexusVersion>2.11.2-06</nexusVersion>
+  <nexusVersion>2.11.3-01</nexusVersion>
   <globalConnectionSettings>
     <connectionTimeout>20000</connectionTimeout>
     <retrievalRetryCount>3</retrievalRetryCount>
@@ -21,7 +21,7 @@
   <repositories>
     <repository>
       <id>central</id>
-      <name>Maven Central Repository</name>
+      <name>Central</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -37,33 +37,89 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <url>http://repo1.maven.org/maven2/</url>
+        <url>https://repo1.maven.org/maven2/</url>
       </remoteStorage>
       <externalConfiguration>
         <proxyMode>ALLOW</proxyMode>
         <artifactMaxAge>-1</artifactMaxAge>
         <itemMaxAge>1440</itemMaxAge>
         <cleanseRepositoryMetadata>false</cleanseRepositoryMetadata>
-        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
         <checksumPolicy>WARN</checksumPolicy>
         <repositoryPolicy>RELEASE</repositoryPolicy>
-        <autoBlockActive>true</autoBlockActive>
-        <fileTypeValidation>false</fileTypeValidation>
-        <metadataMaxAge>1440</metadataMaxAge>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>apache-snapshots</id>
+      <name>Apache Snapshots</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>https://repository.apache.org/snapshots/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <proxyMode>ALLOW</proxyMode>
+        <artifactMaxAge>1440</artifactMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <cleanseRepositoryMetadata>false</cleanseRepositoryMetadata>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
+        <checksumPolicy>WARN</checksumPolicy>
+        <repositoryPolicy>SNAPSHOT</repositoryPolicy>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>codehaus-snapshots</id>
+      <name>Codehaus Snapshots</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>https://nexus.codehaus.org/snapshots/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <proxyMode>ALLOW</proxyMode>
+        <artifactMaxAge>1440</artifactMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <cleanseRepositoryMetadata>false</cleanseRepositoryMetadata>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
+        <checksumPolicy>WARN</checksumPolicy>
+        <repositoryPolicy>SNAPSHOT</repositoryPolicy>
       </externalConfiguration>
     </repository>
     <repository>
       <id>releases</id>
-      <name>Despegar Releases</name>
+      <name>Releases</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
-      <notFoundCacheActive>true</notFoundCacheActive>
       <notFoundCacheTTL>1440</notFoundCacheTTL>
       <userManaged>true</userManaged>
       <exposed>true</exposed>
       <browseable>true</browseable>
-      <writePolicy>ALLOW_WRITE</writePolicy>
+      <writePolicy>ALLOW_WRITE_ONCE</writePolicy>
       <indexable>true</indexable>
       <searchable>true</searchable>
       <localStorage>
@@ -80,17 +136,16 @@
       </externalConfiguration>
     </repository>
     <repository>
-      <id>3rdparty</id>
-      <name>3rd Party</name>
+      <id>thirdparty</id>
+      <name>3rd party</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
-      <notFoundCacheActive>true</notFoundCacheActive>
       <notFoundCacheTTL>1440</notFoundCacheTTL>
       <userManaged>true</userManaged>
       <exposed>true</exposed>
       <browseable>true</browseable>
-      <writePolicy>ALLOW_WRITE</writePolicy>
+      <writePolicy>ALLOW_WRITE_ONCE</writePolicy>
       <indexable>true</indexable>
       <searchable>true</searchable>
       <localStorage>
@@ -107,34 +162,51 @@
       </externalConfiguration>
     </repository>
     <repository>
-      <id>snapshots</id>
-      <name>Despegar Snapshots</name>
-      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
-      <providerHint>maven2</providerHint>
+      <id>central-m1</id>
+      <name>Central M1 shadow</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.ShadowRepository</providerRole>
+      <providerHint>m2-m1-shadow</providerHint>
       <localStatus>IN_SERVICE</localStatus>
-      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>15</notFoundCacheTTL>
       <userManaged>true</userManaged>
       <exposed>true</exposed>
       <browseable>true</browseable>
-      <writePolicy>ALLOW_WRITE</writePolicy>
-      <indexable>true</indexable>
-      <searchable>true</searchable>
+      <writePolicy>READ_ONLY</writePolicy>
       <localStorage>
         <provider>file</provider>
       </localStorage>
       <externalConfiguration>
-        <proxyMode>ALLOW</proxyMode>
-        <artifactMaxAge>1440</artifactMaxAge>
-        <itemMaxAge>1440</itemMaxAge>
-        <cleanseRepositoryMetadata>false</cleanseRepositoryMetadata>
-        <downloadRemoteIndex>false</downloadRemoteIndex>
-        <checksumPolicy>WARN</checksumPolicy>
-        <repositoryPolicy>SNAPSHOT</repositoryPolicy>
+        <masterRepositoryId>central</masterRepositoryId>
+        <syncAtStartup>false</syncAtStartup>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>hz-dev</id>
-      <name>Hazelcast Snapshots</name>
+      <id>public</id>
+      <name>Public Repositories</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.GroupRepository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheTTL>15</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <externalConfiguration>
+        <mergeMetadata>true</mergeMetadata>
+        <memberRepositories>
+          <memberRepository>releases</memberRepository>
+          <memberRepository>thirdparty</memberRepository>
+          <memberRepository>central</memberRepository>
+        </memberRepositories>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>cloudera-third-party</id>
+      <name>Cloudera Third Party</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -150,22 +222,22 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <url>http://hazelcast.com/maven2/snapshots/</url>
+        <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
       </remoteStorage>
       <externalConfiguration>
-        <repositoryPolicy>SNAPSHOT</repositoryPolicy>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
         <checksumPolicy>WARN</checksumPolicy>
         <fileTypeValidation>false</fileTypeValidation>
         <downloadRemoteIndex>true</downloadRemoteIndex>
-        <artifactMaxAge>1440</artifactMaxAge>
+        <artifactMaxAge>-1</artifactMaxAge>
         <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
-        <proxyMode>BLOCKED_AUTO</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>jbr</id>
-      <name>JBoss Repository</name>
+      <id>activiti-releases</id>
+      <name>Activiti Releases</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -181,7 +253,7 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <url>http://repository.jboss.org/maven2/</url>
+        <url>http://maven.alfresco.com/nexus/content/repositories/activiti/</url>
       </remoteStorage>
       <externalConfiguration>
         <repositoryPolicy>RELEASE</repositoryPolicy>
@@ -190,13 +262,200 @@
         <downloadRemoteIndex>true</downloadRemoteIndex>
         <artifactMaxAge>-1</artifactMaxAge>
         <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
-        <proxyMode>BLOCKED_AUTO</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>maven2-repository.dev.java.net</id>
-      <name>Java.net Repository</name>
+      <id>clojars</id>
+      <name>clojars</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>https://clojars.org/repo/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>cloudera-releases</id>
+      <name>Cloudera Releases</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>https://repository.cloudera.com/content/repositories/releases/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>excilys</id>
+      <name>Excilys Repository</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://repository.excilys.com/content/groups/public/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>google</id>
+      <name>Google Code</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://google-maven-repository.googlecode.com/svn/repository/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>versions.grails.org</id>
+      <name>Grails</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://dist.springframework.org.s3.amazonaws.com/release/GRAILS/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>proxies</id>
+      <name>Proxies</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.GroupRepository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheTTL>15</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <externalConfiguration>
+        <memberRepositories>
+          <memberRepository>thirdparty</memberRepository>
+          <memberRepository>activiti-releases</memberRepository>
+          <memberRepository>apache-snapshots</memberRepository>
+          <memberRepository>central</memberRepository>
+          <memberRepository>clojars</memberRepository>
+          <memberRepository>public</memberRepository>
+          <memberRepository>cloudera-releases</memberRepository>
+          <memberRepository>cloudera-third-party</memberRepository>
+          <memberRepository>codehaus-snapshots</memberRepository>
+          <memberRepository>excilys</memberRepository>
+          <memberRepository>google</memberRepository>
+          <memberRepository>versions.grails.org</memberRepository>
+        </memberRepositories>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>java.net-m2</id>
+      <name>java.net - Maven 2</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -218,16 +477,66 @@
         <repositoryPolicy>RELEASE</repositoryPolicy>
         <checksumPolicy>WARN</checksumPolicy>
         <fileTypeValidation>false</fileTypeValidation>
-        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
         <artifactMaxAge>-1</artifactMaxAge>
         <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
-        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>spy</id>
-      <name>Spy Repository</name>
+      <id>java.net-m1</id>
+      <name>java.net-m1</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven1</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://download.java.net/maven/1/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>java.net-m1-m2</id>
+      <name>java.net-m1 M2 shadow</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.ShadowRepository</providerRole>
+      <providerHint>m1-m2-shadow</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheTTL>15</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <externalConfiguration>
+        <masterRepositoryId>java.net-m1</masterRepositoryId>
+        <synchronizeAtStartup>false</synchronizeAtStartup>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>jboss</id>
+      <name>JBoss</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -243,7 +552,7 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <url>http://bleu.west.spy.net/~dustin/m2repo/</url>
+        <url>http://repository.jboss.org/nexus/content/groups/public/</url>
       </remoteStorage>
       <externalConfiguration>
         <repositoryPolicy>RELEASE</repositoryPolicy>
@@ -252,92 +561,293 @@
         <downloadRemoteIndex>true</downloadRemoteIndex>
         <artifactMaxAge>-1</artifactMaxAge>
         <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
-        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>public</id>
-      <name>Public</name>
-      <providerRole>org.sonatype.nexus.proxy.repository.GroupRepository</providerRole>
+      <id>jsr166</id>
+      <name>jsr166</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
       <notFoundCacheActive>true</notFoundCacheActive>
-      <notFoundCacheTTL>15</notFoundCacheTTL>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
       <userManaged>true</userManaged>
       <exposed>true</exposed>
       <browseable>true</browseable>
       <writePolicy>READ_ONLY</writePolicy>
       <indexable>true</indexable>
+      <searchable>true</searchable>
       <localStorage>
         <provider>file</provider>
       </localStorage>
+      <remoteStorage>
+        <url>http://repository.codehaus.org/org/codehaus/jsr166-mirror/</url>
+      </remoteStorage>
       <externalConfiguration>
-        <memberRepositories>
-          <memberRepository>central</memberRepository>
-          <memberRepository>maven2-repository.dev.java.net</memberRepository>
-          <memberRepository>jbr</memberRepository>
-          <memberRepository>spy</memberRepository>
-          <memberRepository>spring</memberRepository>
-          <memberRepository>releases</memberRepository>
-          <memberRepository>snapshots</memberRepository>
-          <memberRepository>3rdparty</memberRepository>
-        </memberRepositories>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+        <proxyMode>BLOCKED_AUTO</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>proxies</id>
-      <name>Proxies</name>
-      <providerRole>org.sonatype.nexus.proxy.repository.GroupRepository</providerRole>
+      <id>OSS</id>
+      <name>OSS</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
       <notFoundCacheActive>true</notFoundCacheActive>
-      <notFoundCacheTTL>15</notFoundCacheTTL>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
       <userManaged>true</userManaged>
       <exposed>true</exposed>
       <browseable>true</browseable>
       <writePolicy>READ_ONLY</writePolicy>
       <indexable>true</indexable>
+      <searchable>true</searchable>
       <localStorage>
         <provider>file</provider>
       </localStorage>
+      <remoteStorage>
+        <url>https://oss.sonatype.org/content/repositories/releases/</url>
+      </remoteStorage>
       <externalConfiguration>
-        <memberRepositories>
-          <memberRepository>central</memberRepository>
-          <memberRepository>maven2-repository.dev.java.net</memberRepository>
-          <memberRepository>spring</memberRepository>
-          <memberRepository>jbr</memberRepository>
-          <memberRepository>spy</memberRepository>
-          <memberRepository>3rdparty</memberRepository>
-          <memberRepository>releases</memberRepository>
-        </memberRepositories>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>proxiessnapshots</id>
-      <name>Proxies Snapshots</name>
-      <providerRole>org.sonatype.nexus.proxy.repository.GroupRepository</providerRole>
+      <id>plugins.grails.org</id>
+      <name>GRails Plugins</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
       <notFoundCacheActive>true</notFoundCacheActive>
-      <notFoundCacheTTL>15</notFoundCacheTTL>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
       <userManaged>true</userManaged>
       <exposed>true</exposed>
       <browseable>true</browseable>
       <writePolicy>READ_ONLY</writePolicy>
       <indexable>true</indexable>
+      <searchable>true</searchable>
       <localStorage>
         <provider>file</provider>
       </localStorage>
+      <remoteStorage>
+        <url>http://plugins.grails.org/</url>
+      </remoteStorage>
       <externalConfiguration>
-        <memberRepositories>
-          <memberRepository>hz-dev</memberRepository>
-        </memberRepositories>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>prime-repo</id>
+      <name>PrimeFaces Repo</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://repository.primefaces.org/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>sbt-plugin-releases</id>
+      <name>sbt-plugin-releases</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>ScalaTools</id>
+      <name>ScalaTools</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>https://oss.sonatype.org/content/groups/scala-tools/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>sonatype-staging</id>
+      <name>sonatype-staging</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>https://oss.sonatype.org/content/groups/staging/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>Spray</id>
+      <name>Spray</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://repo.spray.io/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>Spray-snapshot</id>
+      <name>Spray Snapshots</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://nightlies.spray.io/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>SNAPSHOT</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>false</downloadRemoteIndex>
+        <artifactMaxAge>1440</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
       </externalConfiguration>
     </repository>
     <repository>
       <id>spring</id>
-      <name>Spring Repository</name>
+      <name>Spring Releases</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -353,7 +863,7 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <url>http://repository.springsource.com/maven/bundles/external/</url>
+        <url>http://maven.springframework.org/release/</url>
       </remoteStorage>
       <externalConfiguration>
         <repositoryPolicy>RELEASE</repositoryPolicy>
@@ -362,13 +872,13 @@
         <downloadRemoteIndex>true</downloadRemoteIndex>
         <artifactMaxAge>-1</artifactMaxAge>
         <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
-        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>riptano</id>
-      <name>Riptano</name>
+      <id>spy</id>
+      <name>spy</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -384,7 +894,7 @@
         <provider>file</provider>
       </localStorage>
       <remoteStorage>
-        <url>http://mvn.riptano.com/content/repositories/public/</url>
+        <url>http://files.couchbase.com/maven2/</url>
       </remoteStorage>
       <externalConfiguration>
         <repositoryPolicy>RELEASE</repositoryPolicy>
@@ -393,13 +903,13 @@
         <downloadRemoteIndex>true</downloadRemoteIndex>
         <artifactMaxAge>-1</artifactMaxAge>
         <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
-        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
-      <id>codehaus</id>
-      <name>codehaus</name>
+      <id>typesafe_releases</id>
+      <name>Typesafe Releases</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -413,10 +923,9 @@
       <searchable>true</searchable>
       <localStorage>
         <provider>file</provider>
-        <url>file:/usr/appdata/nexus/storage/codehaus/</url>
       </localStorage>
       <remoteStorage>
-        <url>http://repository.codehaus.org/</url>
+        <url>http://repo.typesafe.com/typesafe/releases/</url>
       </remoteStorage>
       <externalConfiguration>
         <repositoryPolicy>RELEASE</repositoryPolicy>
@@ -425,34 +934,117 @@
         <downloadRemoteIndex>true</downloadRemoteIndex>
         <artifactMaxAge>-1</artifactMaxAge>
         <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
-        <proxyMode>ALLOW</proxyMode>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>typesafe-ivy-releases</id>
+      <name>typesafe-ivy-releases</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://repo.typesafe.com/typesafe/ivy-releases/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>typesafe-maven-releases</id>
+      <name>typesafe-maven-releases</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>http://repo.typesafe.com/typesafe/maven-releases/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>false</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>sbt-ivy-releases</id>
+      <name>sbt-ivy-releases</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.GroupRepository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheTTL>15</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <externalConfiguration>
+        <memberRepositories>
+          <memberRepository>sbt-plugin-releases</memberRepository>
+          <memberRepository>typesafe-ivy-releases</memberRepository>
+        </memberRepositories>
       </externalConfiguration>
     </repository>
   </repositories>
   <repositoryGrouping>
     <pathMappings>
       <pathMapping>
-        <id>49892c699bb8</id>
-        <groupId>*</groupId>
-        <routeType>exclusive</routeType>
-        <routePatterns>
-          <routePattern>.*/com/despegar/.*</routePattern>
-        </routePatterns>
-        <repositories>
-          <repository>proxies</repository>
-        </repositories>
-      </pathMapping>
-      <pathMapping>
         <id>inhouse-stuff</id>
         <groupId>*</groupId>
         <routeType>inclusive</routeType>
         <routePatterns>
-          <routePattern>.*/com/despegar/.*</routePattern>
+          <routePattern>^/(com|org)/somecompany/.*</routePattern>
         </routePatterns>
         <repositories>
           <repository>releases</repository>
-          <repository>snapshots</repository>
+        </repositories>
+      </pathMapping>
+      <pathMapping>
+        <id>apache-stuff</id>
+        <groupId>*</groupId>
+        <routeType>exclusive</routeType>
+        <routePatterns>
+          <routePattern>^/org/some-oss/.*</routePattern>
+        </routePatterns>
+        <repositories>
+          <repository>releases</repository>
         </repositories>
       </pathMapping>
     </pathMappings>
@@ -498,86 +1090,579 @@
         <pattern>.*</pattern>
       </patterns>
     </repositoryTarget>
+    <repositoryTarget>
+      <id>site</id>
+      <name>All (site)</name>
+      <contentClass>site</contentClass>
+      <patterns>
+        <pattern>.*</pattern>
+      </patterns>
+    </repositoryTarget>
+    <repositoryTarget>
+      <id>npm</id>
+      <name>All (npm)</name>
+      <contentClass>npm</contentClass>
+      <patterns>
+        <pattern>.*</pattern>
+      </patterns>
+    </repositoryTarget>
+    <repositoryTarget>
+      <id>nuget</id>
+      <name>All (nuget)</name>
+      <contentClass>nuget</contentClass>
+      <patterns>
+        <pattern>.*</pattern>
+      </patterns>
+    </repositoryTarget>
+    <repositoryTarget>
+      <id>rubygems</id>
+      <name>All (rubygems)</name>
+      <contentClass>rubygems</contentClass>
+      <patterns>
+        <pattern>.*</pattern>
+      </patterns>
+    </repositoryTarget>
   </repositoryTargets>
   <tasks>
     <task>
-      <id>21</id>
-      <name>clean-snapshots</name>
+      <id>14</id>
+      <name>Health Check: central</name>
       <enabled>true</enabled>
-      <type>SnapshotRemoverTask</type>
-      <status>SUBMITTED</status>
-      <nextRun>1311650100000</nextRun>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435079531863</nextRun>
       <schedule>
-        <type>daily</type>
-        <startDate>1293160500000</startDate>
+        <type>hourly</type>
+        <startDate>1435079531863</startDate>
       </schedule>
       <properties>
         <property>
-          <key>removeOlderThanDays</key>
-          <value>5</value>
-        </property>
-        <property>
-          <key>minSnapshotsToKeep</key>
-          <value>5</value>
-        </property>
-        <property>
-          <key>.alertEmail</key>
-          <value>grandich@despegar.com</value>
-        </property>
-        <property>
-          <key>removeIfReleaseExists</key>
-          <value>false</value>
+          <key>repoId</key>
+          <value>central</value>
         </property>
         <property>
           <key>.name</key>
-          <value>clean-snapshots</value>
+          <value>Health Check: central</value>
         </property>
         <property>
           <key>.id</key>
-          <value>21</value>
+          <value>14</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>17</id>
+      <name>Health Check: java.net-m2</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435084832288</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435084832288</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>java.net-m2</value>
         </property>
         <property>
-          <key>repositoryId</key>
-          <value>snapshots</value>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>19</id>
+      <name>Health Check: java.net-m1</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435084917501</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435084917501</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>java.net-m1</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>20</id>
+      <name>Health Check: jboss</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085026144</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085026144</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>jboss</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
         </property>
       </properties>
     </task>
     <task>
       <id>22</id>
-      <name>empty-trash</name>
+      <name>Health Check: jsr166</name>
       <enabled>true</enabled>
-      <type>EmptyTrashTask</type>
-      <status>SUBMITTED</status>
-      <nextRun>1311668100000</nextRun>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085104408</nextRun>
       <schedule>
-        <type>daily</type>
-        <startDate>1294992900000</startDate>
+        <type>hourly</type>
+        <startDate>1435085104408</startDate>
       </schedule>
       <properties>
         <property>
-          <key>EmptyTrashItemsOlderThan</key>
-          <value>1</value>
-        </property>
-        <property>
-          <key>.alertEmail</key>
-          <value>servidores@despegar.com</value>
+          <key>repoId</key>
+          <value>jsr166</value>
         </property>
         <property>
           <key>.name</key>
-          <value>empty-trash</value>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>24</id>
+      <name>Health Check: OSS</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085173713</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085173713</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>OSS</value>
         </property>
         <property>
-          <key>.id</key>
-          <value>22</value>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>26</id>
+      <name>Health Check: plugins.grails.org</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085200617</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085200617</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>plugins.grails.org</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>28</id>
+      <name>Health Check: prime-repo</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085232535</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085232535</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>prime-repo</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>30</id>
+      <name>Health Check: sbt-plugin-releases</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085259345</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085259345</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>sbt-plugin-releases</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>32</id>
+      <name>Health Check: ScalaTools</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085299535</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085299535</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>ScalaTools</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>34</id>
+      <name>Health Check: sonatype-staging</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085330579</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085330579</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>sonatype-staging</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>36</id>
+      <name>Health Check: Spray</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085360911</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085360911</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>Spray</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>41</id>
+      <name>Health Check: typesafe_releases</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085646230</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085646230</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>typesafe_releases</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>43</id>
+      <name>Health Check: typesafe-ivy-releases</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085662846</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085662846</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>typesafe-ivy-releases</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>45</id>
+      <name>Health Check: typesafe-maven-releases</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435085685667</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435085685667</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>typesafe-maven-releases</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>51</id>
+      <name>Health Check: spy</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435079518183</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435079518183</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>spy</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>57</id>
+      <name>Health Check: cloudera-releases</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435087783186</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435087783186</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>cloudera-releases</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>53</id>
+      <name>Health Check: spring</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435079528382</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435079528382</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>spring</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>52</id>
+      <name>Health Check: excilys</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435087792713</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435087792713</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>excilys</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>49</id>
+      <name>Health Check: activiti-releases</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435087762477</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435087762477</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>activiti-releases</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>50</id>
+      <name>Health Check: google</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435087772483</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435087772483</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>google</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>54</id>
+      <name>Health Check: clojars</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435087812906</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435087812906</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>clojars</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>55</id>
+      <name>Health Check: versions.grails.org</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435087823021</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435087823021</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>versions.grails.org</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+    <task>
+      <id>56</id>
+      <name>Health Check: cloudera-third-party</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1435087833074</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1435087833074</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>cloudera-third-party</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
         </property>
       </properties>
     </task>
   </tasks>
   <smtpConfiguration>
-    <hostname>mail.despegar.com</hostname>
+    <hostname>smtp-host</hostname>
     <port>25</port>
     <username>smtp-username</username>
-    <password>{TRRFwZPMEgsHnlNQkeWZf1Ks0GSmzlJqJi9KnRycgqI=}</password>
-    <systemEmailAddress>nexusprod@despexds.net</systemEmailAddress>
+    <password>{sA7sGsUaiYIHxGep483+t7+5+w2nYNywgDuRJILDoL0=}</password>
+    <systemEmailAddress>system@nexus.org</systemEmailAddress>
   </smtpConfiguration>
+  <notification />
 </nexusConfiguration>
