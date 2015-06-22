@@ -16,3 +16,8 @@ echo "Now you can start nexus by doing nexus/bin/nexus start"
 
 
 rsync -av --delete nexusData/storage/releases/ nexusprod-01:nexusData/storage/releases/
+
+
+despegar@nexusprod-00:~$ curl --request DELETE -u admin:admin123 http://nexusprod-01:8081/nexus/content/repositories/releases/com/despegar/cgp/jenkins-diegote-plugin/0.7.3
+despegar@nexusprod-00:~$ curl --request DELETE -u deployment:d3sp3g4r http://nexusprod-01:8081/nexus/content/repositories/releases/com/despegar/cgp/jenkins-diegote-plugin/0.7.3
+despegar@nexusprod-00:~$ rsync -av --delete nexusData/storage/releases/ nexusprod-01:nexusData/storage/releases/
