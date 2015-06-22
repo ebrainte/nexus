@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security>
+  <version>2.0.5</version>
+  <users>
+    <user>
+      <id>anonymous</id>
+      <firstName>Nexus</firstName>
+      <lastName>Anonymous User</lastName>
+      <password>$shiro1$SHA-512$1024$wi0TSROtySWbvHJ5e61loA==$jf+P8pWo+61YRexcu1zQDmH5padxmNy8zGDnATkQ3PSVK0ss67/tL1i/HgRbvoEECsOXuKcZPxXqOymhxuzgEQ==</password>
+      <status>active</status>
+      <email>changeme2@yourcompany.com</email>
+    </user>
+    <user>
+      <id>admin</id>
+      <firstName>Administrator</firstName>
+      <lastName>User</lastName>
+      <password>$shiro1$SHA-512$1024$o4XLW5ZV9OIbUoSwr+AuHg==$464/q+U48hXxqujlStmjrRgtf9TnWeGdZDH89iDCSe2xkatw9nKVaBxJZL4EVwGSjCNiV7qX7D2rN5dmzKC0Vw==</password>
+      <status>active</status>
+      <email>changeme@yourcompany.com</email>
+    </user>
+    <user>
+      <id>deployment</id>
+      <firstName>Deploys</firstName>
+      <lastName>usr</lastName>
+      <password>$shiro1$SHA-512$1024$VqIr/VQquY3xaH7kS9W5yw==$DnLFGv4FnOP+mTKkcWiDoCHzayqpHf/DVwjqfeEzhgfO/hDJfb81bSpgH+0t4+WO78i2ADqJCfgqbdSgforrQw==</password>
+      <status>active</status>
+      <email>servidores@despegar.com</email>
+    </user>
+  </users>
+  <userRoleMappings>
+    <userRoleMapping>
+      <userId>anonymous</userId>
+      <source>default</source>
+      <roles>
+        <role>anonymous</role>
+        <role>repository-any-read</role>
+      </roles>
+    </userRoleMapping>
+    <userRoleMapping>
+      <userId>admin</userId>
+      <source>default</source>
+      <roles>
+        <role>nx-admin</role>
+      </roles>
+    </userRoleMapping>
+    <userRoleMapping>
+      <userId>deployment</userId>
+      <source>default</source>
+      <roles>
+        <role>nx-deployment</role>
+        <role>site-all-full</role>
+        <role>repository-any-full</role>
+      </roles>
+    </userRoleMapping>
+  </userRoleMappings>
+</security>
