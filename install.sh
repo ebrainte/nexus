@@ -14,6 +14,8 @@ wget https://raw.githubusercontent.com/ebrainte/nexus/master/security.xml -O nex
 echo "Now you can start nexus by doing nexus/bin/nexus start"
 
 
+csync -v /home/despegar/test/ sftp://despegar@nexustest-01/home/despegar/test
+
 
 rsync -av --delete nexusData/storage/releases/ nexusprod-01:nexusData/storage/releases/
 
