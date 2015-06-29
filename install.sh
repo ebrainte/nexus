@@ -1,3 +1,4 @@
+sudo /usr/local/scripts/install-csync.sh
 wget https://sonatype-download.global.ssl.fastly.net/nexus/oss/nexus-2.11.3-01-bundle.tar.gz
 tar -xvzf nexus-2.11.3-01-bundle.tar.gz
 ln -s nexus-2.11.3-01 nexus
@@ -16,6 +17,8 @@ echo "Now you can start nexus by doing nexus/bin/nexus start"
 
 csync -v /home/despegar/test/ sftp://despegar@nexustest-01/home/despegar/test
 
+
+* * * * * /usr/bin/csync -v /home/despegar/nexusData/storage/releases/ sftp://despegar@nexusprod-00/home/despegar/nexusData/storage/releases/ > /home/despegar/csyncoutput.log
 
 rsync -av --delete nexusData/storage/releases/ nexusprod-01:nexusData/storage/releases/
 
