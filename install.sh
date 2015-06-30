@@ -1,8 +1,11 @@
+if [ ! -d "nexusData" ]; then
+  echo "You dont have any disk mounted, please mount a volume to /home/despegar/nexusData before proceeding"
+fi
 sudo /usr/local/scripts/install-csync.sh
 wget https://sonatype-download.global.ssl.fastly.net/nexus/oss/nexus-2.11.3-01-bundle.tar.gz
 tar -xvzf nexus-2.11.3-01-bundle.tar.gz
 ln -s nexus-2.11.3-01 nexus
-mkdir nexusData #Data Folder nexus
+#mkdir nexusData #Data Folder nexus
 rm -R sonatype-work/ #delete original folder
 echo "Copying Config files\n"
 mv nexus/conf/nexus.properties nexus/conf/nexus.properties.old
@@ -12,6 +15,14 @@ mkdir -p nexusData/conf/
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/nexus.xml -O nexusData/conf/nexus.xml
 #mv nexusData/conf/security.xml nexusData/conf/security.xml.bak
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/security.xml -O nexusData/conf/security.xml
+
+mkdir -p /home/despegar/nexusData/storage/releases/ 
+
+wget https://raw.githubusercontent.com/ebrainte/nexus/master/cronjob -O cronjob
+
+crontab cronjob
+
+
 echo "Now you can start nexus by doing nexus/bin/nexus start"
 
 
