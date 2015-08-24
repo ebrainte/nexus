@@ -17,6 +17,7 @@ wget https://raw.githubusercontent.com/ebrainte/nexus/master/nexus.xml -O nexusD
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/security.xml -O nexusData/conf/security.xml
 
 mkdir -p /home/despegar/nexusData/storage/releases/ 
+wget https://raw.githubusercontent.com/ebrainte/nexus/master/cron.sh -O cron.sh
 
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/cronjob -O cronjob
 
