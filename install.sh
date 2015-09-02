@@ -8,8 +8,20 @@ ln -s nexus-2.11.3-01 nexus
 #mkdir nexusData #Data Folder nexus
 rm -R sonatype-work/ #delete original folder
 echo "Copying Config files\n"
+
+#getting new configs
 mv nexus/conf/nexus.properties nexus/conf/nexus.properties.old
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/nexus.properties -O nexus/conf/nexus.properties
+
+mv nexus/bin/jsw/conf/wrapper.conf nexus/bin/jsw/conf/wrapper.conf.old
+wget https://raw.githubusercontent.com/ebrainte/nexus/master/wrapper.conf -O nexus/bin/jsw/conf/wrapper.conf
+
+mkdir -p nexus/conf/ssl
+wget https://raw.githubusercontent.com/ebrainte/nexus/master/keystore -O nexus/conf/ssl/keystore
+
+mv nexus/conf/jetty-https.xml nexus/conf/jetty-https.xml.old
+wget https://raw.githubusercontent.com/ebrainte/nexus/master/jetty-https.xml -O nexus/conf/jetty-https.xml
+
 mkdir -p nexusData/conf/
 #mv nexusData/conf/nexus.xml nexusData/conf/nexus.xml.bak
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/nexus.xml -O nexusData/conf/nexus.xml
