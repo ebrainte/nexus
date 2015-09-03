@@ -17,7 +17,8 @@ mv nexus/bin/jsw/conf/wrapper.conf nexus/bin/jsw/conf/wrapper.conf.old
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/wrapper.conf -O nexus/bin/jsw/conf/wrapper.conf
 
 mkdir -p nexus/conf/ssl
-wget https://raw.githubusercontent.com/ebrainte/nexus/master/keystore -O nexus/conf/ssl/keystore
+#wget https://raw.githubusercontent.com/ebrainte/nexus/master/keystore -O nexus/conf/ssl/keystore
+cp keys/private-key.jks nexus/conf/ssl/keystore
 
 mv nexus/conf/jetty-https.xml nexus/conf/jetty-https.xml.old
 wget https://raw.githubusercontent.com/ebrainte/nexus/master/jetty-https.xml -O nexus/conf/jetty-https.xml

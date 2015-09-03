@@ -32,9 +32,9 @@
           <New class="org.eclipse.jetty.util.ssl.SslContextFactory">
             <Set name="keyStore">./conf/ssl/keystore</Set>
             <Set name="trustStore">./conf/ssl/keystore</Set>
-            <Set name="keyStorePassword">d3sp3g4r</Set>
-            <Set name="keyManagerPassword">d3sp3g4r</Set>
-            <Set name="trustStorePassword">d3sp3g4r</Set>
+            <Set name="keyStorePassword">despegar</Set>
+            <Set name="keyManagerPassword">despegar</Set>
+            <Set name="trustStorePassword">despegar</Set>
             <Set name="excludeProtocols">
               <Array type="java.lang.String">
                 <Item>SSL</Item>
