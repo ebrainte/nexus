@@ -3,12 +3,12 @@
   <version>2.8.0</version>
   <nexusVersion>2.11.3-01</nexusVersion>
   <globalConnectionSettings>
-    <connectionTimeout>20000</connectionTimeout>
+    <connectionTimeout>35000</connectionTimeout>
     <retrievalRetryCount>3</retrievalRetryCount>
     <queryString></queryString>
   </globalConnectionSettings>
   <restApi>
-    <uiTimeout>60000</uiTimeout>
+    <uiTimeout>120000</uiTimeout>
   </restApi>
   <httpProxy>
     <enabled>true</enabled>
